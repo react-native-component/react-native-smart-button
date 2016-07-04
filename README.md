@@ -1,2 +1,2 @@
-# react-native-x-button
+# react-native-smart-button
 A button for react-native apps
