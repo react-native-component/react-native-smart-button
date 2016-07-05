@@ -13,7 +13,7 @@ npm install @react-native-component/react-native-smart-button --save
 
 ## Usage
 
-Install the button from npm with 'npm install @react-native-component/react-native-smart-button --save`.
+Install the button from npm with `npm install @react-native-component/react-native-smart-button --save`.
 Then, require it from your app's JavaScript files with `import Button from '@react-native-component/react-native-smart-button'`.
 
 ```
