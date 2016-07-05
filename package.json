@@ -1,0 +1,25 @@
+{
+  "name": "react-native-smart-button",
+  "version": "1.0.0",
+  "description": "A smart button for React Native apps",
+  "main": "button.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-native-component/react-native-smart-button.git"
+  },
+  "keywords": [
+    "react-native",
+    "smart",
+    "button",
+    "component"
+  ],
+  "author": "HISAME SHIZUMARU",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/react-native-component/react-native-smart-button/issues"
+  },
+  "homepage": "https://github.com/react-native-component/react-native-smart-button#readme"
+}
