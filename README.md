@@ -18,37 +18,38 @@ Then, require it from your app's JavaScript files with `import Button from '@rea
 
 ```js
 <Button
- style={{height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
- textStyle={{fontSize: 17, color: 'white'}}
+  style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+  textStyle={{fontSize: 17, color: 'white'}}
 >
- opacity all (按钮透明)
+  opacity all (按钮透明)
 </Button>
+
 <Button
   touchableType={'opacityContent'}
-  style={{flex: 1, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+  style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
   textStyle={{fontSize: 17, color: 'white'}}
 >
   opacity content (内容透明)
 </Button>
+
 <Button
   touchableType={'highlight'}
   underlayColor={'#C90000'}
-  style={{flex: 1, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+  style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
   textStyle={{fontSize: 17, color: 'white'}}
-  onPress={ () => {} }
 >
   highlight (背景高亮)
 </Button>
+
 <Button
-    onPressIn={ () => {} }
-    onPressOut={ () => {} }
-    touchableType={'blur'}
-    underlayColor={'#C90000'}
-    style={{flex: 1, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-    textStyle={{fontSize: 17,  color: 'white'}}
-  >
-    blur for ios (模糊阴影)
-  </Button>
+  touchableType={'blur'}
+  underlayColor={'#C90000'}
+  style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+  textStyle={{fontSize: 17,  color: 'white'}}
+
+>
+  blur for ios (模糊阴影)
+</Button>
 ```
 
 ## Props
