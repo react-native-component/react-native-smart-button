@@ -44,17 +44,17 @@ export default class Blur extends Component {
     }
 
   componentWillReceiveProps (nextProps) {
-    if(this.boxDimension == null) {
-      this.boxDimension = this._getBoxDimension(nextProps.textDimension, nextProps.containerDimension)
-      this.boxOffset = this._getBoxOffset(this.boxDimension)
-      this.shadowOffset = this._getShadowOffset(nextProps.containerDimension, this.boxDimension)
-      this.shadowRadius = this._getShadowRadius(this.boxDimension)
+    if(this._boxDimension == null) {
+      this._boxDimension = this._getBoxDimension(nextProps.textDimension, nextProps.containerDimension)
+      this._boxOffset = this._getBoxOffset(this._boxDimension)
+      this._shadowOffset = this._getShadowOffset(nextProps.containerDimension, this._boxDimension)
+      this._shadowRadius = this._getShadowRadius(this._boxDimension)
     }
     this._toogleBlur(nextProps)
   }
 
   render() {
-      if(this.boxDimension == null) {
+      if(this._boxDimension == null) {
         return null
       }
       else {
@@ -63,15 +63,15 @@ export default class Blur extends Component {
             style={{
               opacity: this.state.opacity,
               position: 'absolute',
-              width: this.boxDimension.width,
-              height: this.boxDimension.height,
-              left: this.boxOffset.x,
-              top: this.boxOffset.y,
-              borderRadius: this.shadowRadius,
+              width: this._boxDimension.width,
+              height: this._boxDimension.height,
+              left: this._boxOffset.x,
+              top: this._boxOffset.y,
+              borderRadius: this._shadowRadius,
               shadowColor: this.props.shadowColor,
               shadowOpacity: this.props.shadowOpacity,
-              shadowOffset: this.shadowOffset,
-              shadowRadius: this.shadowRadius,
+              shadowOffset: this._shadowOffset,
+              shadowRadius: this._shadowRadius,
              }}
           ></Animated.View>
         ) : (
@@ -79,24 +79,20 @@ export default class Blur extends Component {
             style={{
               opacity: this.state.opacity,
               position: 'absolute',
-              width: this.boxDimension.width,
-              height: this.boxDimension.height,
-              left: this.boxOffset.x,
-              top: this.boxOffset.y,
-              borderRadius: this.shadowRadius,
+              width: this._boxDimension.width,
+              height: this._boxDimension.height,
+              left: this._boxOffset.x,
+              top: this._boxOffset.y,
+              borderRadius: this._shadowRadius,
               shadowColor: this.props.shadowColor,
               shadowOpacity: this.props.shadowOpacity,
-              shadowOffset: this.shadowOffset,
-              shadowRadius: this.shadowRadius,
+              shadowOffset: this._shadowOffset,
+              shadowRadius: this._shadowRadius,
              }}
           ></View>
         )
       }
   }
-
-  //componentDidUpdate() {
-  //  this._toogleBlur()
-  //}
 
   _getBoxDimension(textDimension, containerDimension) {
     return {
