@@ -76,7 +76,7 @@ export default class Button extends Component {
               touchableProps.underlayColor = this.props.underlayColor
               return (
                 <TouchableHighlight
-                  style={[this.props.style, styles.touchContainer]}
+                  style={[this.props.style]}
                   {...touchableProps}
                   testID={this.props.testID}>
                   <View>
@@ -93,7 +93,7 @@ export default class Button extends Component {
              return (
                <View style={this.props.style}>
                  <TouchableOpacity
-                   style={[styles.touchContainer, styles.touchContainer]}
+                   style={[styles.touchContainer]}
                    {...touchableProps}
                    testID={this.props.testID}>
                    {this.props.icon}
@@ -131,7 +131,7 @@ export default class Button extends Component {
              touchableProps.activeOpacity = this.props.activeOpacity
              return (
                  <TouchableOpacity
-                   style={[this.props.style, styles.touchContainer]}
+                   style={[this.props.style]}
                    {...touchableProps}
                    testID={this.props.testID}>
                    {this.props.icon}
