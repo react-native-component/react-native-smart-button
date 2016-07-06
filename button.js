@@ -28,6 +28,9 @@ export default class Button extends Component {
   static defaultProps = {
     touchableType: TOUCH_TYPE,
     activeOpacity: SYSTEM_OPACITY,
+    onPress: () => {},
+    onPressIn: () => {},
+    onPressOut: () => {},
   }
 
   static PropTypes = {
@@ -60,15 +63,9 @@ export default class Button extends Component {
       let touchableProps = {},
           touchableType = this.props.touchableType
       if(!this.props.disabled) {
-        if(this.props.onPress) {
-          touchableProps.onPress = this.props.onPress
-        }
-        if(this.props.onPressIn) {
-          touchableProps.onPressIn = this.props.onPressIn
-        }
-        if(this.props.onPressOut) {
-          touchableProps.onPressOut = this.props.onPressOut
-        }
+        touchableProps.onPress = this.props.onPress
+        touchableProps.onPressIn = this.props.onPressIn
+        touchableProps.onPressOut = this.props.onPressOut
       }
       switch (touchableType) {
           case 'highlight':
