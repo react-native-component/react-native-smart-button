@@ -1,6 +1,8 @@
 # react-native-smart-button
 A smart button for react-native apps
 
+Inspired by [react-native-button][6]
+
 ## Preview
 
 ![react-native-smart-button-preview][5]
@@ -72,3 +74,4 @@ shadowColor     | color  | Yes      | '#fff'    | see [react-native documents][4
 [3]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 [4]: https://facebook.github.io/react-native/docs/shadowproptypesios.html
 [5]: http://cyqresig.github.io/img/react-native-smart-button-preview.gif
+[6]: https://github.com/ide/react-native-button
