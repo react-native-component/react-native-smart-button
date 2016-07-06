@@ -1,6 +1,6 @@
 {
   "name": "@react-native-component/react-native-smart-button",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A smart button for React Native apps",
   "main": "button.js",
   "scripts": {
