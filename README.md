@@ -1,5 +1,8 @@
 # react-native-smart-button
-A smart button for react-native apps
+A smart button for react-native apps, written in JS for cross-platform support.
+It works on iOS and Android.
+
+This component is compatible with React Native 0.25 and newer.
 
 Inspired by [react-native-button][6]
 
