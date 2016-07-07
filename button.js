@@ -18,7 +18,7 @@ import {
   StyleSheet,
 } from 'react-native'
 
-import Blur from './blur'
+import Blur from './Blur'
 
 const SYSTEM_OPACITY = 0.2
 const TOUCH_TYPE = 'opacity'
