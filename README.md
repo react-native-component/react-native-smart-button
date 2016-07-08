@@ -23,37 +23,74 @@ Then, require it from your app's JavaScript files with `import Button from '@rea
 
 ```js
 <Button
-  style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-  textStyle={{fontSize: 17, color: 'white'}}
+    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
 >
-  opacity all (按钮透明)
+    opacity all (按钮透明)
 </Button>
 
 <Button
-  touchableType={'opacityContent'}
-  style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-  textStyle={{fontSize: 17, color: 'white'}}
+    touchableType={'opacityContent'}
+    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
 >
-  opacity content (内容透明)
+    opacity content (内容透明)
 </Button>
 
 <Button
-  touchableType={'highlight'}
-  underlayColor={'#C90000'}
-  style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-  textStyle={{fontSize: 17, color: 'white'}}
+    touchableType={'highlight'}
+    underlayColor={'#C90000'}
+    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
 >
   highlight (背景高亮)
 </Button>
 
 <Button
-  touchableType={'blur'}
-  underlayColor={'#C90000'}
-  style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-  textStyle={{fontSize: 17,  color: 'white'}}
+    touchableType={'blur'}
+    underlayColor={'#C90000'}
+    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17,  color: 'white'}}
 
 >
-  blur for ios (模糊阴影)
+    blur for ios (模糊阴影)
+</Button>
+
+<Button
+    touchableType={'opacity'}
+    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
+>
+    <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
+    icon1
+</Button>
+
+<Button
+    touchableType={'opacityContent'}
+    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
+>
+    <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
+    icon2
+</Button>
+
+<Button
+    touchableType={'highlight'}
+    underlayColor={'#C90000'}
+    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17, color: 'white'}}
+>
+  <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
+  icon3
+</Button>
+
+<Button
+    touchableType={'blur'}
+    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+    textStyle={{fontSize: 17,  color: 'white'}}
+>
+    <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
+    icon4
 </Button>
 ```
 
