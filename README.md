@@ -113,5 +113,5 @@ shadowColor     | color  | Yes      | '#fff'    | see [react-native documents][4
 [2]: https://facebook.github.io/react-native/docs/style.html
 [3]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 [4]: https://facebook.github.io/react-native/docs/shadowproptypesios.html
-[5]: http://cyqresig.github.io/img/react-native-smart-button-preview.gif
+[5]: http://cyqresig.github.io/img/react-native-smart-button-preview-v1.1.0.gif
 [6]: https://github.com/ide/react-native-button
