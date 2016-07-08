@@ -8,6 +8,7 @@
 import React, {
   Component,
   PropTypes,
+  isValidElement,
 } from 'react'
 import {
   View,
@@ -44,8 +45,6 @@ export default class Button extends Component {
       onPressOut: PropTypes.func,
       onPress: PropTypes.func,
       disabled: PropTypes.bool,
-      icon: PropTypes.element,
-      badge: PropTypes.element,
       shadowOpacity: PropTypes.number,
       shadowColor: PropTypes.color,
   }
@@ -75,14 +74,9 @@ export default class Button extends Component {
                 <TouchableHighlight
                   style={[this.props.style]}
                   {...touchableProps}
-                  testID={this.props.testID}>
-                  <View>
-                    {this.props.icon}
-                    <Text style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}>
-                      {this.props.children}
-                    </Text>
-                    {this.props.badge}
-                  </View>
+                  testID={this.props.testID}
+                >
+                 {this._renderChildren()}
                 </TouchableHighlight>
               )
            case 'opacityContent':
@@ -92,12 +86,9 @@ export default class Button extends Component {
                  <TouchableOpacity
                    style={[styles.touchContainer]}
                    {...touchableProps}
-                   testID={this.props.testID}>
-                   {this.props.icon}
-                   <Text style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}>
-                     {this.props.children}
-                   </Text>
-                   {this.props.badge}
+                   testID={this.props.testID}
+                 >
+                   {this._renderChildren()}
                  </TouchableOpacity>
                </View>
              )
@@ -110,15 +101,9 @@ export default class Button extends Component {
                  <TouchableOpacity
                    style={styles.touchContainer}
                    {...touchableProps}
-                   testID={this.props.testID}>
-                   {this.props.icon}
-                   <Text
-                     onLayout={this._onTextLayout}
-                     style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}
-                   >
-                     {this.props.children}
-                   </Text>
-                   {this.props.badge}
+                   testID={this.props.testID}
+                 >
+                   {this._renderChildren()}
                  </TouchableOpacity>
                  {this._renderBlur()}
                </View>
@@ -128,14 +113,11 @@ export default class Button extends Component {
              touchableProps.activeOpacity = this.props.activeOpacity
              return (
                  <TouchableOpacity
-                   style={[this.props.style]}
+                   style={[this.props.style, ]}
                    {...touchableProps}
-                   testID={this.props.testID}>
-                   {this.props.icon}
-                   <Text style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}>
-                     {this.props.children}
-                   </Text>
-                   {this.props.badge}
+                   testID={this.props.testID}
+                 >
+                   {this._renderChildren()}
                  </TouchableOpacity>
                )
       }
@@ -151,6 +133,26 @@ export default class Button extends Component {
             shadowColor={this.props.shadowColor}
           />
       )
+  }
+
+  _renderChildren() {
+     let children = React.Children.map(this.props.children, (child) => {
+       if(!React.isValidElement(child)) {
+         return (
+           <Text
+             onLayout={this._onTextLayout}
+             style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}>
+             {child}
+           </Text>
+         )
+       }
+       return child
+     })
+     return (
+       <View style={styles.contentContainer}>
+         {children}
+       </View>
+     )
   }
 
   _onBlurPressIn = (e) => {
@@ -199,4 +201,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+
+  contentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
