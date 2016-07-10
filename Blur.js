@@ -96,7 +96,8 @@ export default class Blur extends Component {
 
   _getBoxDimension(textDimension, containerDimension) {
     return {
-      width: textDimension.width,
+      //width: textDimension.width,
+      width: containerDimension.height,
       height: containerDimension.height,
     }
   }
@@ -116,7 +117,7 @@ export default class Blur extends Component {
   }
 
   _getShadowRadius(boxDimension) {
-    return Math.min(boxDimension.width, boxDimension.height) / 2
+    return ( Math.min(boxDimension.width, boxDimension.height) / 2 ) * 0.5
   }
 
   _toogleBlur = (nextProps) => {
