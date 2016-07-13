@@ -13,8 +13,16 @@ Inspired by [react-native-button][6]
 ## Installation
 
 ```
+npm install react-native-smart-button --save
+```
+
+or
+
+```
 npm install @react-native-component/react-native-smart-button --save
 ```
+
+
 
 ## Usage
 
