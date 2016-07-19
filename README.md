@@ -110,6 +110,7 @@ touchableType   | string | Yes      | 'opacity' | determines what kind of style 
 activeOpacity   | number | Yes      | 0.2       | see [react-native documents][1]
 underlayColor   | color  | Yes      |           | see [react-native documents][1]
 style           | style  | Yes      |           | see [react-native documents][2]
+textStyle       | style  | Yes      |           | see [react-native documents][7]
 onPressIn       | func   | Yes      |           | see [react-native documents][3]
 onPressOut      | func   | Yes      |           | see [react-native documents][3]
 onPress         | func   | Yes      |           | see [react-native documents][3]
@@ -123,3 +124,4 @@ shadowColor     | color  | Yes      | '#fff'    | see [react-native documents][4
 [4]: https://facebook.github.io/react-native/docs/shadowproptypesios.html
 [5]: http://cyqresig.github.io/img/react-native-smart-button-preview-v1.1.1.gif
 [6]: https://github.com/ide/react-native-button
+[7]: http://facebook.github.io/react-native/docs/text.html#style
