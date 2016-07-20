@@ -9,6 +9,7 @@ Inspired by [react-native-button][6]
 ## Preview
 
 ![react-native-smart-button-preview][5]
+![react-native-smart-button-preview-android][8]
 
 ## Installation
 
@@ -125,3 +126,4 @@ shadowColor     | color  | Yes      | '#fff'    | see [react-native documents][4
 [5]: http://cyqresig.github.io/img/react-native-smart-button-preview-v1.1.1.gif
 [6]: https://github.com/ide/react-native-button
 [7]: http://facebook.github.io/react-native/docs/text.html#style
+[8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.1.3.gif
