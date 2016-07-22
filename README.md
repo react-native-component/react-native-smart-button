@@ -31,6 +31,16 @@ Install the button from npm with `npm install @react-native-component/react-nati
 Then, require it from your app's JavaScript files with `import Button from '@react-native-component/react-native-smart-button'`.
 
 ```js
+ <Button
+          disabled={true}
+          style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+          textStyle={{fontSize: 17, color: 'white'}}
+          disabledStyle={{backgroundColor: '#DDDDDD', borderWidth: 0,}}
+          disabledTextStyle={{color: '#BCBCBC'}}
+        >
+          disabled (按钮禁用)
+</Button>
+
 <Button
     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
     textStyle={{fontSize: 17, color: 'white'}}
@@ -105,25 +115,27 @@ Then, require it from your app's JavaScript files with `import Button from '@rea
 
 ## Props
 
-Prop            | Type   | Optional | Default   | Description
---------------- | ------ | -------- | --------- | -----------
-touchableType   | string | Yes      | 'opacity' | determines what kind of style of the button should be when touch is active.
-activeOpacity   | number | Yes      | 0.2       | see [react-native documents][1]
-underlayColor   | color  | Yes      |           | see [react-native documents][1]
-style           | style  | Yes      |           | see [react-native documents][2]
-textStyle       | style  | Yes      |           | see [react-native documents][7]
-onPressIn       | func   | Yes      |           | see [react-native documents][3]
-onPressOut      | func   | Yes      |           | see [react-native documents][3]
-onPress         | func   | Yes      |           | see [react-native documents][3]
-disabled        | bool   | Yes      |           | see [react-native documents][3]
-shadowOpacity   | number | Yes      | 1         | see [react-native documents][4]
-shadowColor     | color  | Yes      | '#fff'    | see [react-native documents][4]
+Prop              | Type   | Optional | Default   | Description
+----------------  | ------ | -------- | --------- | -----------
+touchableType     | string | Yes      | 'opacity' | determines what kind of style of the button should be when touch is active.
+activeOpacity     | number | Yes      | 0.2       | see [react-native documents][1]
+underlayColor     | color  | Yes      |           | see [react-native documents][1]
+style             | style  | Yes      |           | see [react-native documents][2]
+textStyle         | style  | Yes      |           | see [react-native documents][7]
+disabledStyle     | style  | Yes      |           | see [react-native documents][2]
+disabledTextStyle | style  | Yes      |           | see [react-native documents][7]
+onPressIn         | func   | Yes      |           | see [react-native documents][3]
+onPressOut        | func   | Yes      |           | see [react-native documents][3]
+onPress           | func   | Yes      |           | see [react-native documents][3]
+disabled          | bool   | Yes      |           | see [react-native documents][3]
+shadowOpacity     | number | Yes      | 1         | see [react-native documents][4]
+shadowColor       | color  | Yes      | '#fff'    | see [react-native documents][4]
 
 [1]: https://facebook.github.io/react-native/docs/touchablehighlight.html
 [2]: https://facebook.github.io/react-native/docs/style.html
 [3]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 [4]: https://facebook.github.io/react-native/docs/shadowproptypesios.html
-[5]: http://cyqresig.github.io/img/react-native-smart-button-preview-v1.1.1.gif
+[5]: http://cyqresig.github.io/img/react-native-smart-button-preview-ios-v1.1.5.gif
 [6]: https://github.com/ide/react-native-button
 [7]: http://facebook.github.io/react-native/docs/text.html#style
-[8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.1.3.gif
+[8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.1.5.gif
