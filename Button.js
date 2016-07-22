@@ -40,7 +40,9 @@ export default class Button extends Component {
       activeOpacity: PropTypes.number,
       underlayColor: PropTypes.color,
       style: View.propTypes.style,
+      disabledStyle: View.propTypes.style,
       textStyle: Text.propTypes.style,
+      disabledTextStyle: Text.propTypes.style,
       onPressIn: PropTypes.func,
       onPressOut: PropTypes.func,
       onPress: PropTypes.func,
@@ -72,7 +74,8 @@ export default class Button extends Component {
               touchableProps.underlayColor = this.props.underlayColor
               return (
                 <TouchableHighlight
-                  style={[this.props.style]}
+                  disabled={this.props.disabled}
+                  style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null,]}
                   {...touchableProps}
                   testID={this.props.testID}
                 >
@@ -82,8 +85,9 @@ export default class Button extends Component {
            case 'opacityContent':
              touchableProps.activeOpacity = this.props.activeOpacity
              return (
-               <View style={this.props.style}>
+               <View style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null,]}>
                  <TouchableOpacity
+                   disabled={this.props.disabled}
                    style={[styles.touchContainer]}
                    {...touchableProps}
                    testID={this.props.testID}
@@ -97,8 +101,9 @@ export default class Button extends Component {
              touchableProps.onPressIn = this._onBlurPressIn
              touchableProps.onPressOut = this._onBlurPressOut
              return (
-               <View onLayout={this._onButtonLayout} style={[this.props.style, {position: 'relative', overflow: 'hidden',}]}>
+               <View onLayout={this._onButtonLayout} style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null, {position: 'relative', overflow: 'hidden',}]}>
                  <TouchableOpacity
+                   disabled={this.props.disabled}
                    style={styles.touchContainer}
                    {...touchableProps}
                    testID={this.props.testID}
@@ -113,7 +118,8 @@ export default class Button extends Component {
              touchableProps.activeOpacity = this.props.activeOpacity
              return (
                  <TouchableOpacity
-                   style={[this.props.style, ]}
+                   disabled={this.props.disabled}
+                   style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null, ]}
                    {...touchableProps}
                    testID={this.props.testID}
                  >
@@ -141,7 +147,7 @@ export default class Button extends Component {
          return (
            <Text
              onLayout={this._onTextLayout}
-             style={[styles.text, this.props.disabled ? styles.disabledText : null, this.props.textStyle]}>
+             style={[styles.text, this.props.textStyle, this.props.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null, ]}>
              {child}
            </Text>
          )
