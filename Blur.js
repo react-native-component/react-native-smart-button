@@ -26,10 +26,16 @@ export default class Blur extends Component {
 
   static PropTypes = {
     show: PropTypes.bool,
-    textDimension: PropTypes.object,
-    containerDimension: PropTypes.object,
+    //textDimension: PropTypes.shape({
+    //    width: PropTypes.number.isRequired,
+    //    height: PropTypes.number.isRequired,
+    //}),
+    containerDimension: PropTypes.shape({
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+    }),
     shadowOpacity: PropTypes.number,
-    shadowColor: PropTypes.color,
+    shadowColor: PropTypes.string,
     animated: PropTypes.bool,
     duration: PropTypes.number,
   }
@@ -45,7 +51,7 @@ export default class Blur extends Component {
 
   componentWillReceiveProps (nextProps) {
     if(this._boxDimension == null) {
-      this._boxDimension = this._getBoxDimension(nextProps.textDimension, nextProps.containerDimension)
+      this._boxDimension = this._getBoxDimension(nextProps.containerDimension)
       this._boxOffset = this._getBoxOffset(this._boxDimension)
       this._shadowOffset = this._getShadowOffset(nextProps.containerDimension, this._boxDimension)
       this._shadowRadius = this._getShadowRadius(this._boxDimension)
@@ -94,7 +100,7 @@ export default class Blur extends Component {
       }
   }
 
-  _getBoxDimension(textDimension, containerDimension) {
+  _getBoxDimension(containerDimension) {
     return {
       //width: textDimension.width,
       width: containerDimension.height,
