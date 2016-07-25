@@ -42,11 +42,11 @@ export default class Blur extends Component {
 
   // 构造
     constructor(props) {
-      super(props);
+      super(props)
       // 初始状态
       this.state = {
         opacity: props.animated ? new Animated.Value(0) : 0,
-      };
+      }
     }
 
   componentWillReceiveProps (nextProps) {

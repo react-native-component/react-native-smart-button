@@ -53,11 +53,11 @@ export default class Button extends Component {
 
     // 构造
     constructor(props, context) {
-      super(props);
+      super(props)
       // 初始状态
       this.state = {
          pressIn: false,
-      };
+      }
     }
 
   render() {
