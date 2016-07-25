@@ -36,9 +36,9 @@ export default class Button extends Component {
 
   static PropTypes = {
       testID: PropTypes.string,
-      touchableType: PropTypes.string,
+      touchableType: PropTypes.oneOf(['highlight', 'opacityContent', 'blur', 'opacity', ]),
       activeOpacity: PropTypes.number,
-      underlayColor: PropTypes.color,
+      underlayColor: PropTypes.string,
       style: View.propTypes.style,
       disabledStyle: View.propTypes.style,
       textStyle: Text.propTypes.style,
@@ -48,7 +48,7 @@ export default class Button extends Component {
       onPress: PropTypes.func,
       disabled: PropTypes.bool,
       shadowOpacity: PropTypes.number,
-      shadowColor: PropTypes.color,
+      shadowColor: PropTypes.string,
   }
 
     // 构造
