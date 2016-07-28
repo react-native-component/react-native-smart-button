@@ -58,6 +58,8 @@ export default class Button extends Component {
       this.state = {
          pressIn: false,
       }
+      this._boxDimension = null
+
     }
 
   render() {
@@ -133,8 +135,8 @@ export default class Button extends Component {
       return  (
           <Blur
             show={this.state.pressIn}
-            textDimension={this.textDimension}
-            containerDimension={this.boxDimension}
+            //textDimension={this.textDimension}
+            containerDimension={this._boxDimension}
             shadowOpacity={this.props.shadowOpacity}
             shadowColor={this.props.shadowColor}
           />
@@ -146,7 +148,7 @@ export default class Button extends Component {
        if(!React.isValidElement(child)) {
          return (
            <Text
-             onLayout={this._onTextLayout}
+             //onLayout={this._onTextLayout}
              style={[styles.text, this.props.textStyle, this.props.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null, ]}>
              {child}
            </Text>
@@ -176,18 +178,18 @@ export default class Button extends Component {
   }
 
   _onButtonLayout = (e) => {
-    this.boxDimension = {
+    this._boxDimension = {
       width: e.nativeEvent.layout.width,
       height: e.nativeEvent.layout.height,
     }
   }
 
-  _onTextLayout = (e) => {
-     this.textDimension = {
-       width: e.nativeEvent.layout.width,
-       height: e.nativeEvent.layout.height,
-     }
-  }
+  //_onTextLayout = (e) => {
+  //   this.textDimension = {
+  //     width: e.nativeEvent.layout.width,
+  //     height: e.nativeEvent.layout.height,
+  //   }
+  //}
 
 }
 
