@@ -34,7 +34,6 @@ export default class Button extends Component {
         onPress: NOOP,
         onPressIn: NOOP,
         onPressOut: NOOP,
-        renderLoadingView: NOOP,
     }
 
     static PropTypes = {
@@ -51,7 +50,7 @@ export default class Button extends Component {
         onPress: PropTypes.func,
         disabled: PropTypes.bool,
         isLoading: PropTypes.bool,
-        renderLoadingView: PropTypes.func,
+        loadingComponent: PropTypes.element,
         shadowOpacity: PropTypes.number,
         shadowColor: PropTypes.string,
     }
@@ -153,7 +152,7 @@ export default class Button extends Component {
         if(this.props.isLoading) {
             return (
                 <View style={styles.contentContainer}>
-                    {this.props.renderLoadingView()}
+                    {this.props.loadingComponent}
                 </View>
             )
         }
