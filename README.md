@@ -39,9 +39,9 @@ import {
     Platform,
 } from 'react-native'
 
-import Button from 'react-native-smart-button'
+import Button from '../../react-native-smart-button'
 import image_liking from '../images/liking.png'
-import Badge from 'react-native-smart-badge'
+import Badge from '../../react-native-smart-badge'
 
 export default class AllButton extends Component {
 
@@ -107,9 +107,9 @@ export default class AllButton extends Component {
                     touchableType={'opacity'}
                     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
-                    renderLoadingView={ () => {
-                        return this._renderActivityIndicator()
-                    }}
+                    loadingComponent={
+                        this._renderActivityIndicator()
+                    }
                     onPress={ () => {
                         this.setState({
                             btn_1_isLoading: true
@@ -128,14 +128,12 @@ export default class AllButton extends Component {
                     touchableType={'opacityContent'}
                     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
-                    renderLoadingView={ () => {
-                        return (
+                    loadingComponent={
                             <View style={{flexDirection: 'row', alignItems: 'center'}}>
                                 {this._renderActivityIndicator()}
                                 <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold', fontFamily: '.HelveticaNeueInterface-MediumP4',}}>loading</Text>
                             </View>
-                        )
-                    }}
+                    }
                     onPress={ () => {
                         this.setState({
                             btn_2_isLoading: true
@@ -219,6 +217,8 @@ onPressIn         | func   | Yes      |           | see [react-native documents]
 onPressOut        | func   | Yes      |           | see [react-native documents][3]
 onPress           | func   | Yes      |           | see [react-native documents][3]
 disabled          | bool   | Yes      |           | see [react-native documents][3]
+isLoading         | bool   | Yes      | false     | determines the loading status of the button
+loadingComponent  | func   | Yes      |           | determines the presentation which replaces the content when loading status of the button is true
 shadowOpacity     | number | Yes      | 1         | see [react-native documents][4]
 shadowColor       | color  | Yes      | '#fff'    | see [react-native documents][4]
 
