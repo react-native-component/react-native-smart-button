@@ -26,118 +26,182 @@ If you need use badge button, Install the badge from npm with `npm install react
 Then, require it from your app's JavaScript files with `import Badge from 'react-native-smart-badge'`.
 
 ```js
- import React, {Component} from 'react'
- import {
-   ScrollView,
-   View,
-   StyleSheet,
-   Image,
-   Text,
- } from 'react-native'
+import React, {Component} from 'react'
+import {
+    ScrollView,
+    View,
+    StyleSheet,
+    Image,
+    Text,
+    ActivityIndicator,
+    ActivityIndicatorIOS,
+    ProgressBarAndroid,
+    Platform,
+} from 'react-native'
 
- import Button from 'react-native-smart-button'
- import image_liking from '../images/liking.png'
- import Badge from 'react-native-smart-badge'
+import Button from 'react-native-smart-button'
+import image_liking from '../images/liking.png'
+import Badge from 'react-native-smart-badge'
 
- export default class AllButton extends Component {
+export default class AllButton extends Component {
 
-   render() {
-     return (
-       <ScrollView style={{flex: 1, marginTop: 20 + 44, }}>
+    // 构造
+    constructor (props) {
+        super(props);
+        // 初始状态
+        this.state = {
+            btn_1_isLoading: false,
+            btn_2_isLoading: false,
+        };
+    }
 
-         <Button
-           disabled={true}
-           style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-           disabledStyle={{backgroundColor: '#DDDDDD', borderWidth: 0,}}
-           disabledTextStyle={{color: '#BCBCBC'}}
-         >
-           disabled (按钮禁用)
-         </Button>
+    render () {
+        return (
+            <ScrollView style={{flex: 1, marginTop: 20 + 44, }}>
 
-         <Button
-           style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           opacity all (按钮透明)
-         </Button>
+                <Button
+                    disabled={true}
+                    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                    disabledStyle={{backgroundColor: '#DDDDDD', borderWidth: 0,}}
+                    disabledTextStyle={{color: '#BCBCBC'}}
+                >
+                    disabled (按钮禁用)
+                </Button>
 
-         <Button
-           touchableType={'opacityContent'}
-           style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           opacity content (内容透明)
-         </Button>
+                <Button
+                    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                >
+                    opacity all (按钮透明)
+                </Button>
 
-         <Button
-           touchableType={'highlight'}
-           underlayColor={'#C90000'}
-           style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           highlight (背景高亮)
-         </Button>
+                <Button
+                    touchableType={'opacityContent'}
+                    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                >
+                    opacity content (内容透明)
+                </Button>
 
-         <Button
-           touchableType={'blur'}
-           style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17,  color: 'white'}}
+                <Button
+                    touchableType={'highlight'}
+                    underlayColor={'#C90000'}
+                    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                >
+                    highlight (背景高亮)
+                </Button>
 
-         >
-           blur for ios (模糊阴影)
-         </Button>
+                <Button
+                    touchableType={'blur'}
+                    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17,  color: 'white'}}
 
-         <Button
-           touchableType={'opacity'}
-           style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
-           icon1
-         </Button>
+                >
+                    blur for ios (模糊阴影)
+                </Button>
 
-         <Button
-           touchableType={'opacityContent'}
-           style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
-           icon2
-         </Button>
+                <Button
+                    isLoading={this.state.btn_1_isLoading}
+                    touchableType={'opacity'}
+                    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                    renderLoadingView={ () => {
+                        return this._renderActivityIndicator()
+                    }}
+                    onPress={ () => {
+                        this.setState({
+                            btn_1_isLoading: true
+                        })
+                        setTimeout( () => {
+                            this.setState({
+                                btn_1_isLoading: false
+                            })
+                        }, 3000)
+                    }}>
+                    loading (加载器)
+                </Button>
 
-         <Button
-           touchableType={'highlight'}
-           underlayColor={'#C90000'}
-           style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17, color: 'white'}}
-         >
-           badge1
-           <Badge
-             style={{ backgroundColor: '#00AAEF', marginLeft: 6, }}
-             textStyle={{ color: '#fff', fontSize: 12, }}>
-             8
-           </Badge>
-         </Button>
+                <Button
+                    isLoading={this.state.btn_2_isLoading}
+                    touchableType={'opacityContent'}
+                    style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                    renderLoadingView={ () => {
+                        return (
+                            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                                {this._renderActivityIndicator()}
+                                <Text style={{fontSize: 17, color: 'white', fontWeight: 'bold', fontFamily: '.HelveticaNeueInterface-MediumP4',}}>loading</Text>
+                            </View>
+                        )
+                    }}
+                    onPress={ () => {
+                        this.setState({
+                            btn_2_isLoading: true
+                        })
+                        setTimeout( () => {
+                            this.setState({
+                                btn_2_isLoading: false
+                            })
+                        }, 3000)
+                    }}>
+                    loading (加载器+文字)
+                </Button>
 
-         <Button
-           touchableType={'blur'}
-           style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
-           textStyle={{fontSize: 17,  color: 'white'}}
-         >
-           badge2
-           <Badge
-             style={{ backgroundColor: '#00AAEF', marginLeft: 6, }}
-             textStyle={{ color: '#fff', fontSize: 12, }}>
-             18
-           </Badge>
-         </Button>
+                <Button
+                    touchableType={'highlight'}
+                    underlayColor={'#C90000'}
+                    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17, color: 'white'}}
+                >
+                    <Image source={image_liking} style={{width: 40, height: 40, marginRight: 3, }}/>
+                    icon (图标)
+                </Button>
 
-       </ScrollView>
-     )
-   }
+                <Button
+                    touchableType={'blur'}
+                    style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
+                    textStyle={{fontSize: 17,  color: 'white'}}
+                >
+                    badge (徽章)
+                    <Badge
+                        style={{ backgroundColor: '#00AAEF', marginLeft: 6, }}
+                        textStyle={{ color: '#fff', fontSize: 12, }}>
+                        8
+                    </Badge>
+                </Button>
 
- }
+            </ScrollView>
+        )
+    }
+
+    _renderActivityIndicator() {
+        return ActivityIndicator ? (
+            <ActivityIndicator
+                style={{margin: 10,}}
+                animating={true}
+                color={'#fff'}
+                size={'small'}/>
+        ) : Platform.OS == 'android' ?
+            (
+                <ProgressBarAndroid
+                    style={{margin: 10,}}
+                    color={'#fff'}
+                    styleAttr={'Small'}/>
+
+            ) :  (
+            <ActivityIndicatorIOS
+                style={{margin: 10,}}
+                animating={true}
+                color={'#fff'}
+                size={'small'}/>
+        )
+
+
+    }
+
+}
 ```
 
 ## Props
@@ -162,7 +226,7 @@ shadowColor       | color  | Yes      | '#fff'    | see [react-native documents]
 [2]: https://facebook.github.io/react-native/docs/style.html
 [3]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 [4]: https://facebook.github.io/react-native/docs/shadowproptypesios.html
-[5]: http://cyqresig.github.io/img/react-native-smart-button-preview-ios-v1.2.1.gif
+[5]: http://cyqresig.github.io/img/react-native-smart-button-preview-ios-v1.3.0.gif
 [6]: https://github.com/ide/react-native-button
 [7]: http://facebook.github.io/react-native/docs/text.html#style
-[8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.2.1.gif
+[8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.3.0.gif
