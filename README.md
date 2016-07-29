@@ -218,7 +218,7 @@ onPressOut        | func   | Yes      |           | see [react-native documents]
 onPress           | func   | Yes      |           | see [react-native documents][3]
 disabled          | bool   | Yes      |           | see [react-native documents][3]
 isLoading         | bool   | Yes      | false     | determines the loading status of the button
-loadingComponent  | func   | Yes      |           | determines the presentation which replaces the content when loading status of the button is true
+loadingComponent  | element| Yes      |           | determines the presentation which replaces the content when loading status of the button is true
 shadowOpacity     | number | Yes      | 1         | see [react-native documents][4]
 shadowColor       | color  | Yes      | '#fff'    | see [react-native documents][4]
 
