@@ -216,6 +216,7 @@ disabledTextStyle | style  | Yes      |           | see [react-native documents]
 onPressIn         | func   | Yes      |           | see [react-native documents][3]
 onPressOut        | func   | Yes      |           | see [react-native documents][3]
 onPress           | func   | Yes      |           | see [react-native documents][3]
+onLayout          | func   | Yes      |           | see [react-native documents][3]
 disabled          | bool   | Yes      |           | see [react-native documents][3]
 isLoading         | bool   | Yes      | false     | determines the loading status of the button
 loadingComponent  | element| Yes      |           | determines the presentation which replaces the content when loading status of the button is true
