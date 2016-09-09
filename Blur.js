@@ -24,7 +24,7 @@ export default class Blur extends Component {
     duration: DEFAULT_SHADOW_DURATION
   }
 
-  static PropTypes = {
+  static propTypes = {
     show: PropTypes.bool.isRequired,
     //textDimension: PropTypes.shape({
     //    width: PropTypes.number.isRequired,

@@ -37,7 +37,7 @@ export default class Button extends Component {
         onLayout: NOOP,
     }
 
-    static PropTypes = {
+    static propTypes = {
         testID: PropTypes.string,
         touchableType: PropTypes.oneOf([ 'highlight', 'opacityContent', 'blur', 'opacity', ]),
         activeOpacity: PropTypes.number,
