@@ -17,6 +17,10 @@ Inspired by [react-native-button][6]
 npm install react-native-smart-button --save
 ```
 
+## Full Demo
+
+see [ReactNativeComponentDemos][0]
+
 ## Usage
 
 Install the button from npm with `npm install react-native-smart-button --save`.
@@ -223,6 +227,7 @@ loadingComponent  | element| Yes      |           | determines the presentation 
 shadowOpacity     | number | Yes      | 1         | see [react-native documents][4]
 shadowColor       | color  | Yes      | '#fff'    | see [react-native documents][4]
 
+[0]: https://github.com/cyqresig/ReactNativeComponentDemos
 [1]: https://facebook.github.io/react-native/docs/touchablehighlight.html
 [2]: https://facebook.github.io/react-native/docs/style.html
 [3]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
