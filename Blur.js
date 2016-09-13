@@ -9,11 +9,7 @@ import {
   View,
 } from 'react-native'
 
-
-const DEFAULT_SHADOW_COLOR = '#fff'
-const DEFAULT_SHADOW_OPACITY = 1
-const DEFAULT_SHADOW_ANIMATED = true
-const DEFAULT_SHADOW_DURATION = 150
+import { DEFAULT_SHADOW_COLOR, DEFAULT_SHADOW_OPACITY, DEFAULT_SHADOW_ANIMATED, DEFAULT_SHADOW_DURATION } from './constants'
 
 export default class Blur extends Component {
 
