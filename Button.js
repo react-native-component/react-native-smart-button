@@ -19,18 +19,17 @@ import {
     StyleSheet,
 } from 'react-native'
 
+import constants, { touchableTypes, SYSTEM_OPACITY, NOOP, EMPTY_OBJECT } from './constants'
 import Blur from './Blur'
-
-const SYSTEM_OPACITY = 0.2
-const TOUCH_TYPE = 'opacity'
-const NOOP = () => {}
 
 export default class Button extends Component {
 
+    static constants = constants
+
     static defaultProps = {
-        touchableType: TOUCH_TYPE,
+        touchableType: touchableTypes.fade,
         activeOpacity: SYSTEM_OPACITY,
-        isLoading: false,
+        loading: false,
         onPress: NOOP,
         onPressIn: NOOP,
         onPressOut: NOOP,
@@ -39,7 +38,7 @@ export default class Button extends Component {
 
     static propTypes = {
         testID: PropTypes.string,
-        touchableType: PropTypes.oneOf([ 'highlight', 'opacityContent', 'blur', 'opacity', ]),
+        touchableType: PropTypes.oneOf([ touchableTypes.highlight, touchableTypes.fadeContent, touchableTypes.blur, touchableTypes.fade, ]),
         activeOpacity: PropTypes.number,
         underlayColor: PropTypes.string,
         style: View.propTypes.style,
@@ -51,7 +50,7 @@ export default class Button extends Component {
         onPress: PropTypes.func,
         onLayout: PropTypes.func,
         disabled: PropTypes.bool,
-        isLoading: PropTypes.bool,
+        loading: PropTypes.bool,
         loadingComponent: PropTypes.element,
         shadowOpacity: PropTypes.number,
         shadowColor: PropTypes.string,
@@ -63,13 +62,15 @@ export default class Button extends Component {
         // 初始状态
         this.state = {
             pressIn: false,
+            disabled: props.disabled,
+            loading: props.loading,
         }
-        this._boxDimension = null
+        this._boxDimension = EMPTY_OBJECT
 
     }
 
     render () {
-        let touchableProps = {},
+        let touchableProps = EMPTY_OBJECT,
             touchableType = this.props.touchableType
 
         touchableProps.onPress = this.props.onPress
@@ -77,28 +78,28 @@ export default class Button extends Component {
         touchableProps.onPressOut = this.props.onPressOut
 
         switch (touchableType) {
-            case 'highlight':
+            case touchableTypes.highlight:
                 touchableProps.activeOpacity = 1
                 touchableProps.underlayColor = this.props.underlayColor
                 return (
                     <TouchableHighlight
                         onLayout={this.props.onLayout}
-                        disabled={this.props.disabled || this.props.isLoading}
-                        style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null,]}
+                        disabled={this.state.disabled || this.state.loading}
+                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null,]}
                         {...touchableProps}
                         testID={this.props.testID}
                     >
                         {this._renderChildren()}
                     </TouchableHighlight>
                 )
-            case 'opacityContent':
+            case touchableTypes.fadeContent:
                 touchableProps.activeOpacity = this.props.activeOpacity
                 return (
                     <View
                         onLayout={this.props.onLayout}
-                        style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null,]}>
+                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null,]}>
                         <TouchableOpacity
-                            disabled={this.props.disabled || this.props.isLoading}
+                            disabled={this.state.disabled || this.state.loading}
                             style={[styles.touchContainer]}
                             {...touchableProps}
                             testID={this.props.testID}
@@ -107,16 +108,16 @@ export default class Button extends Component {
                         </TouchableOpacity>
                     </View>
                 )
-            case 'blur': //experimental feature
+            case touchableTypes.blur: //experimental feature
                 touchableProps.activeOpacity = this.props.activeOpacity
                 touchableProps.onPressIn = this._onBlurPressIn
                 touchableProps.onPressOut = this._onBlurPressOut
                 return (
                     <View
                         onLayout={this._onButtonLayout}
-                        style={[ {position: 'relative', overflow: 'hidden',}, this.props.style, this.props.disabled ? this.props.disabledStyle : null, ]}>
+                        style={[ {position: 'relative', overflow: 'hidden',}, this.props.style, this.state.disabled ? this.props.disabledStyle : null, ]}>
                         <TouchableOpacity
-                            disabled={this.props.disabled || this.props.isLoading}
+                            disabled={this.state.disabled || this.state.loading}
                             style={styles.touchContainer}
                             {...touchableProps}
                             testID={this.props.testID}
@@ -126,14 +127,14 @@ export default class Button extends Component {
                         {this._renderBlur()}
                     </View>
                 )
-            case 'opacity':
+            case touchableTypes.fade:
             default:
                 touchableProps.activeOpacity = this.props.activeOpacity
                 return (
                     <TouchableOpacity
                         onLayout={this.props.onLayout}
-                        disabled={this.props.disabled || this.props.isLoading}
-                        style={[this.props.style, this.props.disabled ? this.props.disabledStyle : null, ]}
+                        disabled={this.state.disabled || this.state.loading}
+                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null, ]}
                         {...touchableProps}
                         testID={this.props.testID}
                     >
@@ -156,7 +157,7 @@ export default class Button extends Component {
     }
 
     _renderChildren () {
-        if(this.props.isLoading) {
+        if(this.state.loading) {
             return (
                 <View style={styles.contentContainer}>
                     {this.props.loadingComponent}
@@ -169,7 +170,7 @@ export default class Button extends Component {
                     return (
                         <Text
                             //onLayout={this._onTextLayout}
-                            style={[styles.text, this.props.textStyle, this.props.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null, ]}>
+                            style={[styles.text, this.props.textStyle, this.state.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null, ]}>
                             {child}
                         </Text>
                     )
