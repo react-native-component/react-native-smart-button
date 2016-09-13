@@ -43,20 +43,18 @@ import {
     Platform,
 } from 'react-native'
 
-import Button from '../../react-native-smart-button'
+import TimerEnhance from 'react-native-smart-timer-enhance'
+import Button from 'react-native-smart-button'
 import image_liking from '../images/liking.png'
-import Badge from '../../react-native-smart-badge'
+import Badge from 'react-native-smart-badge'
 
-export default class AllButton extends Component {
+class AllButton extends Component {
 
     // 构造
     constructor (props) {
-        super(props);
+        super(props)
         // 初始状态
-        this.state = {
-            btn_1_isLoading: false,
-            btn_2_isLoading: false,
-        };
+        this.state = {}
     }
 
     render () {
@@ -81,7 +79,7 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    touchableType={'opacityContent'}
+                    touchableType={Button.constants.touchableTypes.fadeContent}
                     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
                 >
@@ -89,7 +87,7 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    touchableType={'highlight'}
+                    touchableType={Button.constants.touchableTypes.highlight}
                     underlayColor={'#C90000'}
                     style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
@@ -98,7 +96,7 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    touchableType={'blur'}
+                    touchableType={Button.constants.touchableTypes.blur}
                     style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17,  color: 'white'}}
 
@@ -107,20 +105,22 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    isLoading={this.state.btn_1_isLoading}
-                    touchableType={'opacity'}
+                    ref={ component => this._button_1 = component }
+                    touchableType={Button.constants.touchableTypes.fade}
                     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
                     loadingComponent={
                         this._renderActivityIndicator()
                     }
                     onPress={ () => {
-                        this.setState({
-                            btn_1_isLoading: true
+                        this._button_1.setState({
+                            loading: true,
+                            //disabled: true,
                         })
-                        setTimeout( () => {
-                            this.setState({
-                                btn_1_isLoading: false
+                        this.setTimeout( () => {
+                            this._button_1.setState({
+                                loading: false,
+                                //disabled: false
                             })
                         }, 3000)
                     }}>
@@ -128,8 +128,8 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    isLoading={this.state.btn_2_isLoading}
-                    touchableType={'opacityContent'}
+                    ref={ component => this._button_2 = component }
+                    touchableType={Button.constants.touchableTypes.fadeContent}
                     style={{margin: 10, height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
                     loadingComponent={
@@ -139,12 +139,14 @@ export default class AllButton extends Component {
                             </View>
                     }
                     onPress={ () => {
-                        this.setState({
-                            btn_2_isLoading: true
+                        this._button_2.setState({
+                            loading: true,
+                            //disabled: true,
                         })
-                        setTimeout( () => {
-                            this.setState({
-                                btn_2_isLoading: false
+                        this.setTimeout( () => {
+                            this._button_2.setState({
+                                loading: false,
+                                //disabled: false
                             })
                         }, 3000)
                     }}>
@@ -152,7 +154,7 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    touchableType={'highlight'}
+                    touchableType={Button.constants.touchableTypes.highlight}
                     underlayColor={'#C90000'}
                     style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17, color: 'white'}}
@@ -162,7 +164,7 @@ export default class AllButton extends Component {
                 </Button>
 
                 <Button
-                    touchableType={'blur'}
+                    touchableType={Button.constants.touchableTypes.blur}
                     style={{margin: 10, justifyContent: 'center', height: 40, backgroundColor: 'red', borderRadius: 3, borderWidth: StyleSheet.hairlineWidth, borderColor: 'red', justifyContent: 'center',}}
                     textStyle={{fontSize: 17,  color: 'white'}}
                 >
@@ -204,28 +206,30 @@ export default class AllButton extends Component {
     }
 
 }
+
+export default TimerEnhance(AllButton)
 ```
 
 ## Props
 
-Prop              | Type   | Optional | Default   | Description
-----------------  | ------ | -------- | --------- | -----------
-touchableType     | string | Yes      | 'opacity' | determines what kind of style of the button should be when touch is active.
-activeOpacity     | number | Yes      | 0.2       | see [react-native documents][1]
-underlayColor     | color  | Yes      |           | see [react-native documents][1]
-style             | style  | Yes      |           | see [react-native documents][2]
-textStyle         | style  | Yes      |           | see [react-native documents][7]
-disabledStyle     | style  | Yes      |           | see [react-native documents][2]
-disabledTextStyle | style  | Yes      |           | see [react-native documents][7]
-onPressIn         | func   | Yes      |           | see [react-native documents][3]
-onPressOut        | func   | Yes      |           | see [react-native documents][3]
-onPress           | func   | Yes      |           | see [react-native documents][3]
-onLayout          | func   | Yes      |           | see [react-native documents][3]
-disabled          | bool   | Yes      |           | see [react-native documents][3]
-isLoading         | bool   | Yes      | false     | determines the loading status of the button
-loadingComponent  | element| Yes      |           | determines the presentation which replaces the content when loading status of the button is true
-shadowOpacity     | number | Yes      | 1         | see [react-native documents][4]
-shadowColor       | color  | Yes      | '#fff'    | see [react-native documents][4]
+Prop              | Type   | Optional | Default        | Description
+----------------  | ------ | -------- | -------------- | -----------
+touchableType     | string | Yes      | constants.fade | determines what kind of style of the button should be when touch is active.
+activeOpacity     | number | Yes      | 0.2            | see [react-native documents][1]
+underlayColor     | color  | Yes      |                | see [react-native documents][1]
+style             | style  | Yes      |                | see [react-native documents][2]
+textStyle         | style  | Yes      |                | see [react-native documents][7]
+disabledStyle     | style  | Yes      |                | see [react-native documents][2]
+disabledTextStyle | style  | Yes      |                | see [react-native documents][7]
+onPressIn         | func   | Yes      |                | see [react-native documents][3]
+onPressOut        | func   | Yes      |                | see [react-native documents][3]
+onPress           | func   | Yes      |                | see [react-native documents][3]
+onLayout          | func   | Yes      |                | see [react-native documents][3]
+disabled          | bool   | Yes      |                | see [react-native documents][3]
+loading           | bool   | Yes      | false          | determines the loading status of the button
+loadingComponent  | element| Yes      |                | determines the presentation which replaces the content when loading status of the button is true
+shadowOpacity     | number | Yes      | 1              | see [react-native documents][4]
+shadowColor       | color  | Yes      | '#fff'         | see [react-native documents][4]
 
 [0]: https://github.com/cyqresig/ReactNativeComponentDemos
 [1]: https://facebook.github.io/react-native/docs/touchablehighlight.html
