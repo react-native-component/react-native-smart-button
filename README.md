@@ -1,4 +1,10 @@
 # react-native-smart-button
+
+[![npm](https://img.shields.io/npm/v/react-native-smart-button.svg)](https://www.npmjs.com/package/react-native-smart-button)
+[![npm](https://img.shields.io/npm/dm/react-native-smart-button.svg)](https://www.npmjs.com/package/react-native-smart-button)
+[![npm](https://img.shields.io/npm/dt/react-native-smart-button.svg)](https://www.npmjs.com/package/react-native-smart-button)
+[![npm](https://img.shields.io/npm/l/react-native-smart-button.svg)](https://github.com/react-native-component/react-native-smart-button/blob/master/LICENSE)
+
 A smart button for react-native apps, written in JS for cross-platform support.
 It works on iOS and Android.
 
