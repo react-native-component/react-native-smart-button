@@ -29,7 +29,7 @@ see [ReactNativeComponentDemos][0]
 
 ## Usage
 
-Install the button from npm with `npm install react-native-smart-button --save`.
+Install the package from npm with `npm install react-native-smart-button --save`.
 Then, require it from your app's JavaScript files with `import Button from 'react-native-smart-button'`.
 
 If you need use badge button, Install the badge from npm with `npm install react-native-smart-badge --save`.
