@@ -257,24 +257,24 @@ export default TimerEnhance(AllButton)
 
 ## Props
 
-Prop              | Type   | Optional | Default        | Description
-----------------  | ------ | -------- | -------------- | -----------
-touchableType     | string | Yes      | constants.fade | determines what kind of style of the button should be when touch is active.
-activeOpacity     | number | Yes      | 0.2            | see [react-native documents][1]
-underlayColor     | color  | Yes      |                | see [react-native documents][1]
-style             | style  | Yes      |                | see [react-native documents][2]
-textStyle         | style  | Yes      |                | see [react-native documents][7]
-disabledStyle     | style  | Yes      |                | see [react-native documents][2]
-disabledTextStyle | style  | Yes      |                | see [react-native documents][7]
-onPressIn         | func   | Yes      |                | see [react-native documents][3]
-onPressOut        | func   | Yes      |                | see [react-native documents][3]
-onPress           | func   | Yes      |                | see [react-native documents][3]
-onLayout          | func   | Yes      |                | see [react-native documents][3]
-disabled          | bool   | Yes      |                | see [react-native documents][3]
-loading           | bool   | Yes      | false          | determines the loading status of the button
-loadingComponent  | element| Yes      |                | determines the presentation which replaces the content when loading status of the button is true
-shadowOpacity     | number | Yes      | 1              | see [react-native documents][4]
-shadowColor       | color  | Yes      | '#fff'         | see [react-native documents][4]
+Prop                    | Type   | Optional | Default        | Description
+----------------------- | ------ | -------- | -------------- | -----------
+touchableType           | string | Yes      | constants.fade | determines what kind of style of the button should be when touch is active.
+activeOpacity           | number | Yes      | 0.2            | see [react-native documents][1]
+underlayColor           | color  | Yes      |                | see [react-native documents][1]
+style                   | style  | Yes      |                | see [react-native documents][2]
+textStyle               | style  | Yes      |                | see [react-native documents][7]
+disabledStyle           | style  | Yes      |                | see [react-native documents][2]
+disabledTextStyle       | style  | Yes      |                | see [react-native documents][7]
+onPressIn               | func   | Yes      |                | see [react-native documents][3]
+onPressOut              | func   | Yes      |                | see [react-native documents][3]
+onPress                 | func   | Yes      |                | see [react-native documents][3]
+onLayout                | func   | Yes      |                | see [react-native documents][3]
+disabled                | bool   | Yes      |                | see [react-native documents][3]
+loading                 | bool   | Yes      | false          | determines the loading status of the button
+renderLoadingComponent  | func   | Yes      |                | determines render function which return the presentation to replaces the content when loading status of the button is true
+shadowOpacity           | number | Yes      | 1              | see [react-native documents][4]
+shadowColor             | color  | Yes      | '#fff'         | see [react-native documents][4]
 
 [0]: https://github.com/cyqresig/ReactNativeComponentDemos
 [1]: https://facebook.github.io/react-native/docs/touchablehighlight.html
