@@ -1,0 +1,23 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+curly_bracket_next_line = false
+spaces_around_operators = true
+spaces_around_brackets = none
+indent_brace_style = 1TBS
+
+[*.js]
+quote_type = single
+
+[*.{html,less,css,json}]
+quote_type = double
+
+
+
+

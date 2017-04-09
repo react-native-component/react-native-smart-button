@@ -6,23 +6,44 @@
  */
 
 import React, {
-    Component,
+    PureComponent,
     PropTypes,
-    isValidElement,
 } from 'react'
 import {
     View,
     Text,
     TouchableHighlight,
     TouchableOpacity,
-    TouchableWithoutFeedback,
     StyleSheet,
 } from 'react-native'
 
-import constants, { touchableTypes, SYSTEM_OPACITY, NOOP, EMPTY_OBJECT } from './constants'
+import constants, {touchableTypes, SYSTEM_OPACITY, NOOP, EMPTY_OBJECT,} from './constants'
 import Blur from './Blur'
 
-export default class Button extends Component {
+const styles = StyleSheet.create({
+    text: {
+        color: '#007aff',
+        fontFamily: '.HelveticaNeueInterface-MediumP4',
+        fontSize: 17,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    disabledText: {
+        color: '#dcdcdc',
+    },
+    touchContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    contentContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+})
+
+export default class Button extends PureComponent {
 
     static constants = constants
 
@@ -30,15 +51,22 @@ export default class Button extends Component {
         touchableType: touchableTypes.fade,
         activeOpacity: SYSTEM_OPACITY,
         loading: false,
+        disabled: false,
         onPress: NOOP,
         onPressIn: NOOP,
         onPressOut: NOOP,
         onLayout: NOOP,
+        renderLoadingComponent: NOOP,
     }
 
     static propTypes = {
         testID: PropTypes.string,
-        touchableType: PropTypes.oneOf([ touchableTypes.highlight, touchableTypes.fadeContent, touchableTypes.blur, touchableTypes.fade, ]),
+        touchableType: PropTypes.oneOf([
+            touchableTypes.highlight,
+            touchableTypes.fadeContent,
+            touchableTypes.blur,
+            touchableTypes.fade,
+        ]),
         activeOpacity: PropTypes.number,
         underlayColor: PropTypes.string,
         style: View.propTypes.style,
@@ -51,104 +79,166 @@ export default class Button extends Component {
         onLayout: PropTypes.func,
         disabled: PropTypes.bool,
         loading: PropTypes.bool,
-        loadingComponent: PropTypes.element,
+        renderLoadingComponent: PropTypes.func,
         shadowOpacity: PropTypes.number,
         shadowColor: PropTypes.string,
     }
 
-    // 构造
-    constructor (props, context) {
+    constructor(props) {
         super(props)
-        // 初始状态
         this.state = {
             pressIn: false,
             disabled: props.disabled,
             loading: props.loading,
         }
         this._boxDimension = EMPTY_OBJECT
-
     }
 
-    render () {
-        let touchableProps = EMPTY_OBJECT,
-            touchableType = this.props.touchableType
+    render() {
+        const touchableProps = EMPTY_OBJECT
+        const {touchableType,} = this.props
 
         touchableProps.onPress = this.props.onPress
         touchableProps.onPressIn = this.props.onPressIn
         touchableProps.onPressOut = this.props.onPressOut
 
+        let renderView = null
+
         switch (touchableType) {
             case touchableTypes.highlight:
-                touchableProps.activeOpacity = 1
-                touchableProps.underlayColor = this.props.underlayColor
-                return (
-                    <TouchableHighlight
-                        onLayout={this.props.onLayout}
-                        disabled={this.state.disabled || this.state.loading}
-                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null,]}
-                        {...touchableProps}
-                        testID={this.props.testID}
-                    >
-                        {this._renderChildren()}
-                    </TouchableHighlight>
-                )
+                renderView = this._renderHighlightView(touchableProps)
+                break
             case touchableTypes.fadeContent:
-                touchableProps.activeOpacity = this.props.activeOpacity
-                return (
-                    <View
-                        onLayout={this.props.onLayout}
-                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null,]}>
-                        <TouchableOpacity
-                            disabled={this.state.disabled || this.state.loading}
-                            style={[styles.touchContainer]}
-                            {...touchableProps}
-                            testID={this.props.testID}
-                        >
-                            {this._renderChildren()}
-                        </TouchableOpacity>
-                    </View>
-                )
-            case touchableTypes.blur: //experimental feature
-                touchableProps.activeOpacity = this.props.activeOpacity
-                touchableProps.onPressIn = this._onBlurPressIn
-                touchableProps.onPressOut = this._onBlurPressOut
-                return (
-                    <View
-                        onLayout={this._onButtonLayout}
-                        style={[ {position: 'relative', overflow: 'hidden',}, this.props.style, this.state.disabled ? this.props.disabledStyle : null, ]}>
-                        <TouchableOpacity
-                            disabled={this.state.disabled || this.state.loading}
-                            style={styles.touchContainer}
-                            {...touchableProps}
-                            testID={this.props.testID}
-                        >
-                            {this._renderChildren()}
-                        </TouchableOpacity>
-                        {this._renderBlur()}
-                    </View>
-                )
+                renderView = this._renderFadeContentView(touchableProps)
+                break
+            case touchableTypes.blur: // experimental feature
+                renderView = this._renderBlurView(touchableProps)
+                break
             case touchableTypes.fade:
             default:
-                touchableProps.activeOpacity = this.props.activeOpacity
-                return (
-                    <TouchableOpacity
-                        onLayout={this.props.onLayout}
-                        disabled={this.state.disabled || this.state.loading}
-                        style={[this.props.style, this.state.disabled ? this.props.disabledStyle : null, ]}
-                        {...touchableProps}
-                        testID={this.props.testID}
-                    >
-                        {this._renderChildren()}
-                    </TouchableOpacity>
-                )
+                renderView = this._renderFadeView(touchableProps)
+                break
+        }
+        return renderView
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { disabled: nextDisabled, loading: nextLoading, } = nextProps
+        const { disabled, loading, } = this.props
+        const newState = {}
+        if (nextDisabled !== disabled) {
+            newState.disabled = nextDisabled
+        } else if (nextLoading !== loading) {
+            newState.loading = nextLoading
+        }
+        if (Object.keys(newState).length > 0) {
+            this.setState(newState)
         }
     }
 
-    _renderBlur () {
+    _renderHighlightView(touchableProps) {
+        const reassignedProps = {
+            ...touchableProps,
+            activeOpacity: 1,
+            underlayColor: this.props.underlayColor,
+        }
+        return (
+            <TouchableHighlight
+                onLayout={this.props.onLayout}
+                disabled={this.state.disabled || this.state.loading}
+                style={[
+                    this.props.style,
+                    this.state.disabled ? this.props.disabledStyle : null,
+                ]}
+                {...reassignedProps}
+                testID={this.props.testID}
+            >
+                {this._renderChildren()}
+            </TouchableHighlight>
+        )
+    }
+
+    _renderFadeContentView(touchableProps) {
+        const reassignedProps = {
+            ...touchableProps,
+            activeOpacity: this.props.activeOpacity,
+        }
+        return (
+            <View
+                onLayout={this.props.onLayout}
+                style={[
+                    this.props.style,
+                    this.state.disabled ? this.props.disabledStyle : null,
+                ]}>
+                <TouchableOpacity
+                    disabled={this.state.disabled || this.state.loading}
+                    style={[styles.touchContainer,]}
+                    {...reassignedProps}
+                    testID={this.props.testID}
+                >
+                    {this._renderChildren()}
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    _renderBlurView(touchableProps) {
+        const reassignedProps = {
+            ...touchableProps,
+            activeOpacity: this.props.activeOpacity,
+            onPressIn: this._onBlurPressIn,
+            onPressOut: this._onBlurPressOut,
+        }
+        return (
+            <View
+                onLayout={this._handleButtonLayout}
+                style={[
+                    {
+                        position: 'relative',
+                        overflow: 'hidden',
+                    },
+                    this.props.style,
+                    this.state.disabled ? this.props.disabledStyle : null,
+                ]}>
+                <TouchableOpacity
+                    disabled={this.state.disabled || this.state.loading}
+                    style={styles.touchContainer}
+                    {...reassignedProps}
+                    testID={this.props.testID}
+                >
+                    {this._renderChildren()}
+                </TouchableOpacity>
+                {this._renderBlur()}
+            </View>
+        )
+    }
+
+    _renderFadeView(touchableProps) {
+        const reassignedProps = {
+            ...touchableProps,
+            activeOpacity: this.props.activeOpacity,
+        }
+        return (
+            <TouchableOpacity
+                onLayout={this.props.onLayout}
+                disabled={this.state.disabled || this.state.loading}
+                style={[
+                    this.props.style,
+                    this.state.disabled ? this.props.disabledStyle : null,
+                ]}
+                {...reassignedProps}
+                testID={this.props.testID}
+            >
+                {this._renderChildren()}
+            </TouchableOpacity>
+        )
+    }
+
+    _renderBlur() {
         return (
             <Blur
                 show={this.state.pressIn}
-                //textDimension={this.textDimension}
+                // textDimension={this.textDimension}
                 containerDimension={this._boxDimension}
                 shadowOpacity={this.props.shadowOpacity}
                 shadowColor={this.props.shadowColor}
@@ -156,33 +246,38 @@ export default class Button extends Component {
         )
     }
 
-    _renderChildren () {
-        if(this.state.loading) {
-            return (
+    _renderChildren() {
+        let childView = null
+        if (this.state.loading) {
+            childView = (
                 <View style={styles.contentContainer}>
-                    {this.props.loadingComponent}
+                    {this.props.renderLoadingComponent()}
                 </View>
             )
-        }
-        else {
-            let children = React.Children.map(this.props.children, (child) => {
+        } else {
+            const children = React.Children.map(this.props.children, (child) => {
                 if (!React.isValidElement(child)) {
                     return (
                         <Text
-                            //onLayout={this._onTextLayout}
-                            style={[styles.text, this.props.textStyle, this.state.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null, ]}>
+                            // onLayout={this._onTextLayout}
+                            style={[
+                                styles.text,
+                                this.props.textStyle,
+                                this.state.disabled ? (this.props.disabledTextStyle || styles.disabledText) : null,
+                            ]}>
                             {child}
                         </Text>
                     )
                 }
                 return child
             })
-            return (
+            childView = (
                 <View style={styles.contentContainer}>
                     {children}
                 </View>
             )
         }
+        return childView
     }
 
     _onBlurPressIn = (e) => {
@@ -199,7 +294,7 @@ export default class Button extends Component {
         this.props.onPressOut(e)
     }
 
-    _onButtonLayout = (e) => {
+    _handleButtonLayout = (e) => {
         this._boxDimension = {
             width: e.nativeEvent.layout.width,
             height: e.nativeEvent.layout.height,
@@ -207,35 +302,11 @@ export default class Button extends Component {
         this.props.onLayout(e)
     }
 
-    //_onTextLayout = (e) => {
-    //   this.textDimension = {
-    //     width: e.nativeEvent.layout.width,
-    //     height: e.nativeEvent.layout.height,
-    //   }
-    //}
+    // _onTextLayout = (e) => {
+    //    this.textDimension = {
+    //      width: e.nativeEvent.layout.width,
+    //      height: e.nativeEvent.layout.height,
+    //    }
+    // }
 
 }
-
-const styles = StyleSheet.create({
-    text: {
-        color: '#007aff',
-        fontFamily: '.HelveticaNeueInterface-MediumP4',
-        fontSize: 17,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    disabledText: {
-        color: '#dcdcdc',
-    },
-    touchContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    contentContainer: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})

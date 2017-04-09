@@ -1,25 +1,36 @@
 {
-  "name": "@react-native-component/react-native-smart-button",
-  "version": "1.5.0",
-  "description": "A smart button for React Native apps",
-  "main": "Button.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/react-native-component/react-native-smart-button.git"
-  },
-  "keywords": [
-    "react-native",
-    "smart",
-    "button",
-    "component"
-  ],
-  "author": "HISAME SHIZUMARU",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/react-native-component/react-native-smart-button/issues"
-  },
-  "homepage": "https://github.com/react-native-component/react-native-smart-button#readme"
+    "name": "@react-native-component/react-native-smart-button",
+    "version": "2.0.0",
+    "description": "A smart button for React Native apps",
+    "main": "Button.js",
+    "scripts": {
+        "eslint": "eslint . --quiet"
+    },
+    "pre-commit": [
+        "eslint"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/react-native-component/react-native-smart-button.git"
+    },
+    "keywords": [
+        "react-native",
+        "smart",
+        "button",
+        "component"
+    ],
+    "author": "HISAME SHIZUMARU",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/react-native-component/react-native-smart-button/issues"
+    },
+    "homepage": "https://github.com/react-native-component/react-native-smart-button#readme",
+    "devDependencies": {
+        "babel-eslint": "^7.2.1",
+        "eslint": "^3.19.0",
+        "eslint-config-airbnb-base": "^11.1.2",
+        "eslint-plugin-import": "^2.2.0",
+        "eslint-plugin-react": "^6.10.3",
+        "pre-commit": "^1.2.2"
+    }
 }

@@ -1,0 +1,63 @@
+{
+    "extends": ["airbnb-base/legacy", "eslint:all", "plugin:react/all"],
+    "parser": "babel-eslint",
+    "plugins": [
+        "import",
+        "react"
+    ],
+    "rules": {
+        "indent": ["error", 4, {
+            "SwitchCase": 1
+        }],
+        "semi": ["error", "never"],
+        "comma-dangle": ["error", "always"],
+        "comma-spacing": "off",
+        "object-curly-spacing": "off",
+        "class-methods-use-this": "off",
+        "global-require": "off",
+        "object-curly-newline": "off",
+        "arrow-body-style": "off",
+        "no-ternary": "off",
+        "no-trailing-spaces": "off",
+        "newline-before-return": "off",
+        "newline-after-var": "off",
+        "sort-keys": "off",
+        "sort-imports": "off",
+        "sort-vars": "off",
+        "arrow-parens": "off",
+        "no-inline-comments": "off",
+        "no-process-env": "off",
+        "require-await": "off",
+        "no-negated-condition": "off",
+        "no-underscore-dangle": "off",
+        "line-comment-position": "off",
+        "no-extra-parens": "off",
+        "max-len": "off",
+        "id-length": "off",
+        "no-invalid-this": "off",
+        "no-magic-numbers": "off",
+        "no-console": "off",
+        "no-mixed-operators": "off",
+        "quotes": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/forbid-prop-types": "off",
+        "react/jsx-space-before-closing": "off",
+        "react/jsx-tag-spacing": "off",
+        "react/jsx-closing-bracket-location": "off",
+        "react/jsx-no-literals": "off",
+        "react/prop-types": "off",
+        "react/require-default-props": "off",
+        "react/jsx-max-props-per-line": "off",
+        "react/sort-prop-types": "off",
+        "react/forbid-foreign-prop-types": "off",
+        "react/jsx-sort-props": "off",
+        "react/forbid-component-props": "off",
+        "react/sort-comp": "off",
+        "react/jsx-handler-names": "off",
+        "react/no-set-state": "off"
+    },
+    "globals": {
+        "Promise": true,
+        "require": true
+    }
+}
