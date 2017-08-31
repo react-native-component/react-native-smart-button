@@ -7,8 +7,8 @@
 
 import React, {
     PureComponent,
-    PropTypes,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     View,
     Text,
