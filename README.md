@@ -285,3 +285,4 @@ shadowColor             | color  | Yes      | '#fff'         | see [react-native
 [6]: https://github.com/ide/react-native-button
 [7]: http://facebook.github.io/react-native/docs/text.html#style
 [8]: http://cyqresig.github.io/img/react-native-smart-button-preview-android-v1.3.0.gif
+
