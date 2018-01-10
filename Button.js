@@ -7,10 +7,11 @@
 
 import React, {
     PureComponent,
-    PropTypes,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     View,
+    ViewPropTypes,
     Text,
     TouchableHighlight,
     TouchableOpacity,
@@ -69,8 +70,8 @@ export default class Button extends PureComponent {
         ]),
         activeOpacity: PropTypes.number,
         underlayColor: PropTypes.string,
-        style: View.propTypes.style,
-        disabledStyle: View.propTypes.style,
+        style: ViewPropTypes.style,
+        disabledStyle: ViewPropTypes.style,
         textStyle: Text.propTypes.style,
         disabledTextStyle: Text.propTypes.style,
         onPressIn: PropTypes.func,
